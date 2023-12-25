@@ -16,3 +16,5 @@ var app = builder
 await app.CreateDatabaseAsync();
 
 app.Run();
+
+public partial class Program { }
