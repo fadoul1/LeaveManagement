@@ -1,6 +1,6 @@
 ﻿using LeaveManagement.Application.Features.Employees.Commands.CreateEmployee;
 using LeaveManagement.Application.Features.Leaves.Commands.CreateLeave;
-using LeaveManagement.Application.Features.Leaves.Queries.GetLeavesByUserId;
+using LeaveManagement.Application.Features.Leaves.Queries.GetLeavesByEmployeeId;
 using LeaveManagement.Application.Features.Leaves.Queries.GetLeavesList;
 using LeaveManagement.Application.Responses;
 using MediatR;
@@ -40,7 +40,7 @@ public class LeaveController : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult<List<LeaveResponse>>> GetUserLeaves(long employeeId)
     {
-        var leaves = await _mediator.Send(new GetLeavesByUserIdQuery {
+        var leaves = await _mediator.Send(new GetLeavesByEmployeeIdQuery {
             EmployeeId = employeeId
         });
         return Ok(leaves);

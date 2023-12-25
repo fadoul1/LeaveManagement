@@ -80,8 +80,8 @@ public static class StartupExtensions
         }
         catch (Exception ex)
         {
-            var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
-            logger.LogError(ex, "An error occurred while creating the database.");
+            //var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+           // logger.LogError(ex, "An error occurred while creating the database.");
         }
     }
 }
