@@ -4,23 +4,23 @@ using LeaveManagement.Domain.Contracts.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace LeaveManagement.Application.Features.Leaves.Queries.GetLeavesByUserId;
+namespace LeaveManagement.Application.Features.Leaves.Queries.GetLeavesByEmployeeId;
 
-public class GetLeavesByUserIdQueryHandler : IRequestHandler<GetLeavesByUserIdQuery, List<LeaveResponse>>
+public class GetLeavesByEmployeeIdQueryHandler : IRequestHandler<GetLeavesByEmployeeIdQuery, List<LeaveResponse>>
 {
-    private readonly string _className = nameof(GetLeavesByUserIdQueryHandler);
+    private readonly string _className = nameof(GetLeavesByEmployeeIdQueryHandler);
     private readonly ILeaveRepository _leaveRepository;
-    private readonly ILogger<GetLeavesByUserIdQueryHandler> _logger;
+    private readonly ILogger<GetLeavesByEmployeeIdQueryHandler> _logger;
 
-    public GetLeavesByUserIdQueryHandler(
+    public GetLeavesByEmployeeIdQueryHandler(
         ILeaveRepository leaveRepository,
-        ILogger<GetLeavesByUserIdQueryHandler> logger)
+        ILogger<GetLeavesByEmployeeIdQueryHandler> logger)
     {
         _leaveRepository = leaveRepository;
         _logger = logger;
     }
 
-    public async Task<List<LeaveResponse>> Handle(GetLeavesByUserIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<LeaveResponse>> Handle(GetLeavesByEmployeeIdQuery request, CancellationToken cancellationToken)
     {
         var methodeName = nameof(Handle);
         try
