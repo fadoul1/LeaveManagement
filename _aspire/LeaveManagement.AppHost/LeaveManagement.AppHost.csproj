@@ -7,12 +7,21 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+<<<<<<< HEAD
     <UserSecretsId>8f77e638-cdc0-4f98-9300-a7b1219864ac</UserSecretsId>
     <LangVersion>14</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
+=======
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>39c60fd6-aec8-4ff9-8d42-dfa61e5b240e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
+>>>>>>> bf41ebd (feat: update aspire and replace specflow by reqnrolll for BDD tests (#3))
   </ItemGroup>
 
   <ItemGroup>
