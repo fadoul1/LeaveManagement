@@ -1,6 +1,10 @@
-@LeaveManagement.API_HostAddress = http://localhost:5150
+@LeaveManagement.API_HostAddress = https://localhost:7132
 
 GET {{LeaveManagement.API_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{LeaveManagement.API_HostAddress}}/api/employee
 
 ###
