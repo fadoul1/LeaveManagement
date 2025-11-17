@@ -1,4 +1,5 @@
 using LeaveManagement.API;
+using LeaveManagement.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
