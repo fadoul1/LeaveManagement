@@ -13,20 +13,19 @@ public static class StartupExtensions
         AddSwagger(builder.Services);
 
         builder.Services.AddApplicationServices();
-
         builder.Services.AddPersistenceServices(builder.Configuration);
-
         builder.Services.AddHttpContextAccessor();
-
         builder.Services.AddControllers();
 
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("Open", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            options.AddPolicy("Open", policyBuilder => 
+                policyBuilder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
         });
 
         return builder.Build();
-
     }
 
     public static WebApplication ConfigurePipeline(this WebApplication app)

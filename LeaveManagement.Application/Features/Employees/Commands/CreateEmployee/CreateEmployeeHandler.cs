@@ -8,42 +8,32 @@ using Microsoft.Extensions.Logging;
 
 namespace LeaveManagement.Application.Features.Employees.Commands.CreateEmployee;
 
-public class CreateEmployeeHandler : IRequestHandler<CreateEmployeeCommand, EmployeeResponse?>
+public partial class CreateEmployeeHandler(
+    IBaseRepository<Employee> employeeRepository,
+    IValidator<CreateEmployeeCommand> createEmployeeCommandValidator,
+    ILogger<CreateEmployeeHandler> logger)
+    : IRequestHandler<CreateEmployeeCommand, EmployeeResponse?>
 {
-    private readonly string _className = nameof(CreateEmployeeHandler);
-    private readonly IBaseRepository<Employee> _employeeRepository;
-    private readonly IValidator<CreateEmployeeCommand> _createEmployeeCommandValidator;
-    private readonly ILogger<CreateEmployeeHandler> _logger;
-
-
-    public CreateEmployeeHandler(
-        IBaseRepository<Employee> employeeRepository,
-        IValidator<CreateEmployeeCommand> createEmployeeCommandValidator,
-        ILogger<CreateEmployeeHandler> logger)
-    {
-        _employeeRepository = employeeRepository;
-        _createEmployeeCommandValidator = createEmployeeCommandValidator;
-        _logger = logger;
-    }
+    private const string ClassName = nameof(CreateEmployeeHandler);
 
     public async Task<EmployeeResponse?> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var methodeName = nameof(Handle);
+        const string methodeName = nameof(Handle);
         try
         {
-            _logger.LogInformation($"[{_className}][{methodeName}] Validation of the entries");
+            LogValidationOfTheEntries(logger, ClassName, methodeName);
 
-            var result = await _createEmployeeCommandValidator.ValidateAsync(request);
+            var result = await createEmployeeCommandValidator.ValidateAsync(request, cancellationToken);
             if (!result.IsValid)
             {
                 var resultErrors = result.Errors;
-                string errors = string.Empty;
+                var errors = string.Empty;
 
                 foreach (var error in resultErrors)
                 {
                     errors += $"Property {error.PropertyName} failed Validation. Error was: {error.ErrorMessage} \n";
                 }
-                _logger.LogInformation($"[{_className}][{methodeName}] Entries not valid, with errors: {errors}");
+                LogEntriesNotValidWithErrorsErrors(logger, ClassName, methodeName, errors);
 
                 return new EmployeeResponse
                 {
@@ -52,24 +42,42 @@ public class CreateEmployeeHandler : IRequestHandler<CreateEmployeeCommand, Empl
                 };
             }
 
-            _logger.LogInformation($"[{_className}][{methodeName}] Successfully validated entries");
+            LogSuccessfullyValidatedEntries(logger, ClassName, methodeName);
 
-            _logger.LogInformation($"[{_className}][{methodeName}] Creation of the employee");
+            LogCreationOfTheEmployee(logger, ClassName, methodeName);
 
             var employee = request.ToEmployee();
-            var employeeCreated = await _employeeRepository.CreateAsync(employee);
+            var employeeCreated = await employeeRepository.CreateAsync(employee);
 
-            _logger.LogInformation($"[{_className}][{methodeName}] Successfully created the user");
+            LogSuccessfullyCreateEmployee(logger, ClassName, methodeName);
    
             return employeeCreated.ToEmployeeResponse();
         }
         catch (Exception ex)
         {
-            _logger.LogError($"[{_className}][{methodeName}] Exception: {ex}, Message: {ex.Message}");
+            LogExceptionMessage(logger, ClassName, methodeName, ex, ex.Message);
             return new EmployeeResponse
             {
                 Success = false
             };
         }
     }
+
+    [LoggerMessage(LogLevel.Information, "[{className}][{methodeName}] Validation of the entries")]
+    static partial void LogValidationOfTheEntries(ILogger<CreateEmployeeHandler> logger, string className, string methodeName);
+
+    [LoggerMessage(LogLevel.Information, "[{className}][{MethodeName}] Entries not valid, with errors: {Errors}")]
+    static partial void LogEntriesNotValidWithErrorsErrors(ILogger<CreateEmployeeHandler> logger, string className, string MethodeName, string Errors);
+
+    [LoggerMessage(LogLevel.Information, "[{className}][{methodeName}] Successfully validated entries")]
+    static partial void LogSuccessfullyValidatedEntries(ILogger<CreateEmployeeHandler> logger, string className, string methodeName);
+
+    [LoggerMessage(LogLevel.Information, "[{className}][{methodeName}] Creation of the employee")]
+    static partial void LogCreationOfTheEmployee(ILogger<CreateEmployeeHandler> logger, string className, string methodeName);
+
+    [LoggerMessage(LogLevel.Information, "[{className}][{methodeName}] Successfully created the user")]
+    static partial void LogSuccessfullyCreateEmployee(ILogger<CreateEmployeeHandler> logger, string className, string methodeName);
+
+    [LoggerMessage(LogLevel.Error, "[{className}][{methodeName}] Exception: {exception}, Message: {exMessage}")]
+    static partial void LogExceptionMessage(ILogger<CreateEmployeeHandler> logger, string className, string methodeName, Exception exception, string exMessage);
 }

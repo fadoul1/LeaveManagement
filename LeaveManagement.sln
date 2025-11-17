@@ -1,11 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.9.34310.174
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11018.127 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.AppHost", "LeaveManagement.AppHost\LeaveManagement.AppHost.csproj", "{1F12B731-131F-4B6D-8F5F-957A13116BA2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.ServiceDefaults", "LeaveManagement.ServiceDefaults\LeaveManagement.ServiceDefaults.csproj", "{17E22F25-C7D1-4A5C-9EE8-117722C65D32}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.Persistence", "LeaveManagement.Persistence\LeaveManagement.Persistence.csproj", "{29206C4D-A17E-4364-9465-16EE7633796C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.Domain", "LeaveManagement.Domain\LeaveManagement.Domain.csproj", "{82070BDD-085E-40A5-B475-CDE91F3AA588}"
@@ -14,20 +10,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.API", "LeaveManagement.API\LeaveManagement.API.csproj", "{DB11938B-71BB-401D-ADB9-5A3EA90F8025}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagement.AppHost", "LeaveManagement.AppHost\LeaveManagement.AppHost.csproj", "{FD18337F-B7EB-4705-A9F0-E2BED4BEB665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagement.ServiceDefaults", "LeaveManagement.ServiceDefaults\LeaveManagement.ServiceDefaults.csproj", "{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_aspire", "_aspire", "{319345C3-A0A9-4F71-9989-46456B0C2793}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1F12B731-131F-4B6D-8F5F-957A13116BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F12B731-131F-4B6D-8F5F-957A13116BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F12B731-131F-4B6D-8F5F-957A13116BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F12B731-131F-4B6D-8F5F-957A13116BA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17E22F25-C7D1-4A5C-9EE8-117722C65D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17E22F25-C7D1-4A5C-9EE8-117722C65D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17E22F25-C7D1-4A5C-9EE8-117722C65D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17E22F25-C7D1-4A5C-9EE8-117722C65D32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29206C4D-A17E-4364-9465-16EE7633796C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29206C4D-A17E-4364-9465-16EE7633796C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29206C4D-A17E-4364-9465-16EE7633796C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,11 +38,23 @@ Global
 		{DB11938B-71BB-401D-ADB9-5A3EA90F8025}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB11938B-71BB-401D-ADB9-5A3EA90F8025}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB11938B-71BB-401D-ADB9-5A3EA90F8025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD18337F-B7EB-4705-A9F0-E2BED4BEB665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD18337F-B7EB-4705-A9F0-E2BED4BEB665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD18337F-B7EB-4705-A9F0-E2BED4BEB665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD18337F-B7EB-4705-A9F0-E2BED4BEB665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CD98B2C-D978-498D-B94E-5615A3687BF0}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD18337F-B7EB-4705-A9F0-E2BED4BEB665} = {319345C3-A0A9-4F71-9989-46456B0C2793}
+		{45ECC91C-F177-CCA4-DF26-D58A3FB9A51F} = {319345C3-A0A9-4F71-9989-46456B0C2793}
 	EndGlobalSection
 EndGlobal

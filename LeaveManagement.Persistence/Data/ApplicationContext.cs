@@ -23,17 +23,16 @@ public class ApplicationContext : DbContext
             switch (entry.State)
             {
                 case EntityState.Added:
-                    ((IBaseEntity)entry.Entity).CreatedAt = DateTime.Now;
-                    ((IBaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
+                    ((IBaseEntity)entry.Entity).CreatedAt = DateTimeOffset.UtcNow;
                     break;
 
                 case EntityState.Modified:
-                    ((IBaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
+                    ((IBaseEntity)entry.Entity).UpdatedAt = DateTimeOffset.UtcNow;
                     break;
 
                 case EntityState.Deleted:
                     entry.State = EntityState.Modified;
-                    entry.CurrentValues["DeletedAt"] = DateTime.Now;
+                    entry.CurrentValues["DeletedAt"] = DateTimeOffset.UtcNow;
                     break;
             }
         }
