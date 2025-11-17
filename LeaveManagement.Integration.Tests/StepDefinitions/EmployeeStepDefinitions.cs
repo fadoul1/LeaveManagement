@@ -5,7 +5,7 @@ using LeaveManagement.Persistence.Repositories.Base;
 using LeaveManagement.Tests.IntegrationTests.Common;
 using TechTalk.SpecFlow.Assist;
 
-namespace LeaveManagement.Persistence.IntegrationTests.StepDefinitions;
+namespace LeaveManagement.Persistence.Tests.StepDefinitions;
 
 [Binding]
 public class EmployeeStepDefinitions

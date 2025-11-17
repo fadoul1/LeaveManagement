@@ -1,7 +1,7 @@
 ﻿using LeaveManagement.Persistence.Data;
 using LeaveManagement.Persistence;
 using LeaveManagement.Application;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace LeaveManagement.API;
 

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace LeaveManagement.Persistence.IntegrationTests.Features
+namespace LeaveManagement.Persistence.Tests.Features
 {
     using Reqnroll;
     using System;
@@ -101,9 +101,9 @@ namespace LeaveManagement.Persistence.IntegrationTests.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Retrieve list of employees")]
-        [Xunit.TraitAttribute("FeatureTitle", "Employee")]
-        [Xunit.TraitAttribute("Description", "Retrieve list of employees")]
+        [SkippableFact(DisplayName="Retrieve list of employees")]
+        [Trait("FeatureTitle", "Employee")]
+        [Trait("Description", "Retrieve list of employees")]
         public async System.Threading.Tasks.Task RetrieveListOfEmployees()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -132,9 +132,9 @@ await this.FeatureBackgroundAsync();
             await this.ScenarioCleanupAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Retrieve employee by ID")]
-        [Xunit.TraitAttribute("FeatureTitle", "Employee")]
-        [Xunit.TraitAttribute("Description", "Retrieve employee by ID")]
+        [SkippableFact(DisplayName="Retrieve employee by ID")]
+        [Trait("FeatureTitle", "Employee")]
+        [Trait("Description", "Retrieve employee by ID")]
         public async System.Threading.Tasks.Task RetrieveEmployeeByID()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -166,9 +166,9 @@ await this.FeatureBackgroundAsync();
             await this.ScenarioCleanupAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Create a new employee")]
-        [Xunit.TraitAttribute("FeatureTitle", "Employee")]
-        [Xunit.TraitAttribute("Description", "Create a new employee")]
+        [SkippableFact(DisplayName="Create a new employee")]
+        [Trait("FeatureTitle", "Employee")]
+        [Trait("Description", "Create a new employee")]
         public async System.Threading.Tasks.Task CreateANewEmployee()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -205,9 +205,9 @@ await this.FeatureBackgroundAsync();
             await this.ScenarioCleanupAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Update an existing employee")]
-        [Xunit.TraitAttribute("FeatureTitle", "Employee")]
-        [Xunit.TraitAttribute("Description", "Update an existing employee")]
+        [SkippableFact(DisplayName="Update an existing employee")]
+        [Trait("FeatureTitle", "Employee")]
+        [Trait("Description", "Update an existing employee")]
         public async System.Threading.Tasks.Task UpdateAnExistingEmployee()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -247,9 +247,9 @@ await this.FeatureBackgroundAsync();
             await this.ScenarioCleanupAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Delete an existing employee")]
-        [Xunit.TraitAttribute("FeatureTitle", "Employee")]
-        [Xunit.TraitAttribute("Description", "Delete an existing employee")]
+        [SkippableFact(DisplayName="Delete an existing employee")]
+        [Trait("FeatureTitle", "Employee")]
+        [Trait("Description", "Delete an existing employee")]
         public async System.Threading.Tasks.Task DeleteAnExistingEmployee()
         {
             string[] tagsOfScenario = ((string[])(null));
