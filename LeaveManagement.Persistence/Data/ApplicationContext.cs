@@ -4,17 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LeaveManagement.Persistence.Data;
 
-public class ApplicationContext : DbContext
+public class ApplicationContext(DbContextOptions<ApplicationContext> options) : DbContext(options)
 {
 
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Leave> Leaves { get; set; }
-
-    public ApplicationContext(DbContextOptions<ApplicationContext> options)
-          : base(options)
-    {
-
-    }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {

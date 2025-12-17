@@ -20,9 +20,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     public async Task<T> GetByIdAsync(long id)
     {
         var entity = await Entities.SingleOrDefaultAsync(o => o.Id == id);
-        if (entity == null)
-            throw new Exception("The " + typeof(T).Name + " with Id:" + id + " Not Found");
-        return entity;
+        return entity ?? throw new Exception("The " + typeof(T).Name + " with Id:" + id + " Not Found");
     }
 
     public async Task<List<T>> GetAllAsync()
@@ -32,7 +30,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 
     public async Task<T> CreateAsync(T obj)
     {
-        obj.CreatedAt = DateTime.Now;
+        obj.CreatedAt = DateTimeOffset.UtcNow;
         Entities.Add(obj);
 
         await DbContext.SaveChangesAsync();
@@ -41,7 +39,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 
     public async Task<T> UpdateAsync(T obj)
     {
-        obj.UpdatedAt = DateTime.Now;
+        obj.UpdatedAt = DateTimeOffset.UtcNow;
         Entities.Update(obj);
 
         await DbContext.SaveChangesAsync();
@@ -51,7 +49,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     public async Task<bool> DeleteAsync(long id)
     {
         var obj = await GetByIdAsync(id);
-        obj.DeletedAt = DateTime.Now;
+        obj.DeletedAt = DateTimeOffset.UtcNow;
         Entities.Update(obj);
 
         return await DbContext.SaveChangesAsync() > 0;

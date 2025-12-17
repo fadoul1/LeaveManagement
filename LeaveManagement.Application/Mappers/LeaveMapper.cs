@@ -13,8 +13,8 @@ public static class LeaveMapper
         {
             Type = command.Type,
             Status = command.Status,
-            StartDate = command.StartDate,
-            EndDate = command.EndDate,
+            StartDate = DateTime.SpecifyKind(command.StartDate, DateTimeKind.Utc),
+            EndDate = DateTime.SpecifyKind(command.EndDate, DateTimeKind.Utc),
             Reason = command.Reason,
             EmployeeId = command.EmployeeId,
         };

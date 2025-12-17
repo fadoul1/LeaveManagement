@@ -10,11 +10,11 @@ namespace LeaveManagement.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LeaveController : ControllerBase
+public class LeavesController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public LeaveController(IMediator mediator)
+    public LeavesController(IMediator mediator)
     {
         _mediator = mediator;
     }

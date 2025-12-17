@@ -68,6 +68,12 @@ public static class StartupExtensions
 
     public static async Task CreateDatabaseAsync(this WebApplication app)
     {
+        // Skip database creation in test environment
+        if (app.Environment.EnvironmentName == "Test")
+        {
+            return;
+        }
+
         using var scope = app.Services.CreateScope();
         try
         {
