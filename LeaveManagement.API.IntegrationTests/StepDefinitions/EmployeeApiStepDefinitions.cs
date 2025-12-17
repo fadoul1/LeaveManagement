@@ -27,11 +27,7 @@ internal class EmployeeApiStepDefinitions
     [Given(@"the employee API is configured for testing")]
     public void GivenTheEmployeeAPIIsConfiguredForTesting()
     {
-        using var scope = _factory.Services.CreateScope();
-        var services = scope.ServiceProvider;
-        var dbContext = services.GetRequiredService<ApplicationContext>();
-
-        Utilities.InitializeEmployeesForTests(dbContext);
+        // Data initialization is now handled in DatabaseHook
     }
 
     [When(@"the user requests the list of employees")]
@@ -60,6 +56,10 @@ internal class EmployeeApiStepDefinitions
         var dbContext = services.GetRequiredService<ApplicationContext>();
 
         var employee = await dbContext.Employees.FindAsync(employeeId);
+        if (employee == null)
+        {
+            Utilities.InitializeEmployeesForTests(dbContext);
+        }
     }
 
     [When(@"the user requests the employee with ID (.*)")]
@@ -139,3 +139,5 @@ internal class EmployeeApiStepDefinitions
         _response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
     }    
 }
+
+
