@@ -2,6 +2,6 @@
 
 public static class Routes
 {
-    public const string EmployeeRessource = "/api/employee";
+    public const string EmployeeRessource = "/api/employees";
     public const string LeaveRessource = "/api/leaves";
 }
