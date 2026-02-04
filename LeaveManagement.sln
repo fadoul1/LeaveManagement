@@ -1,6 +1,7 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11018.127 d18.0
+VisualStudioVersion = 18.0.11018.127
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaveManagement.Persistence", "LeaveManagement.Persistence\LeaveManagement.Persistence.csproj", "{29206C4D-A17E-4364-9465-16EE7633796C}"
 EndProject
@@ -31,6 +32,33 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{8EF9A4BF-22E0-4B80-A2AC-310EA37E67B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_aspire", "_aspire", "{83C06C6D-AB9F-4982-9DED-798C582C3DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaveManagement.Application.UnitTests", "LeaveManagement.Application.UnitTests\LeaveManagement.Application.UnitTests.csproj", "{9CF62C2A-C97A-4B61-A8A1-33FD846576FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7A656461-9C3E-412F-8304-44F4E5A8E519}"
+	ProjectSection(SolutionItems) = preProject
+		.github\copilot-instructions.md = .github\copilot-instructions.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prompts", "prompts", "{3F8B7C21-4E5D-42A8-9A3F-D1E2C3B4A5F6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\prompts\software-craftsmanship.prompt.md = .github\prompts\software-craftsmanship.prompt.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet-instructions", "dotnet-instructions", "{E4E57161-CDAB-4148-9F31-C687313627F8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dotnet-instructions\chapter-10_classes.instructions.md = .github\dotnet-instructions\chapter-10_classes.instructions.md
+		.github\dotnet-instructions\chapter-12_emergence.instructions.md = .github\dotnet-instructions\chapter-12_emergence.instructions.md
+		.github\dotnet-instructions\chapter-15_xUnit_Internals.instructions.md = .github\dotnet-instructions\chapter-15_xUnit_Internals.instructions.md
+		.github\dotnet-instructions\chapter-2_meaningful_names.instructions.md = .github\dotnet-instructions\chapter-2_meaningful_names.instructions.md
+		.github\dotnet-instructions\chapter-3_functions.instructions.md = .github\dotnet-instructions\chapter-3_functions.instructions.md
+		.github\dotnet-instructions\chapter-4_comments.instructions.md = .github\dotnet-instructions\chapter-4_comments.instructions.md
+		.github\dotnet-instructions\chapter-5_formatting.instructions.md = .github\dotnet-instructions\chapter-5_formatting.instructions.md
+		.github\dotnet-instructions\chapter-6_objects_and_data_structures.instructions.md = .github\dotnet-instructions\chapter-6_objects_and_data_structures.instructions.md
+		.github\dotnet-instructions\chapter-7_error_handling.instructions.md = .github\dotnet-instructions\chapter-7_error_handling.instructions.md
+		.github\dotnet-instructions\chapter-9_unit_tests.instructions.md = .github\dotnet-instructions\chapter-9_unit_tests.instructions.md
+		.github\dotnet-instructions\chapter-8_boundaries.instructions.md = .github\dotnet-instructions\chapter-8_boundaries.instructions.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +98,10 @@ Global
 		{54F1DDAF-5899-41EE-AFC9-EB6B67BE077F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F1DDAF-5899-41EE-AFC9-EB6B67BE077F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F1DDAF-5899-41EE-AFC9-EB6B67BE077F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF62C2A-C97A-4B61-A8A1-33FD846576FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF62C2A-C97A-4B61-A8A1-33FD846576FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF62C2A-C97A-4B61-A8A1-33FD846576FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF62C2A-C97A-4B61-A8A1-33FD846576FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,12 +113,15 @@ Global
 		{DB11938B-71BB-401D-ADB9-5A3EA90F8025} = {15251A8D-31F0-4B39-9133-E9C0D2F21BD9}
 		{ED757DB3-2ADE-4828-9152-61A33CC08D6B} = {35D59C93-27C0-4CBA-B316-44B7C115B75C}
 		{D629DF43-27F9-45F7-A65F-A85B90C8DB57} = {35D59C93-27C0-4CBA-B316-44B7C115B75C}
+		{2115890F-87E2-4F62-8B5C-FA4E6DC179D2} = {83C06C6D-AB9F-4982-9DED-798C582C3DE9}
+		{54F1DDAF-5899-41EE-AFC9-EB6B67BE077F} = {83C06C6D-AB9F-4982-9DED-798C582C3DE9}
 		{15251A8D-31F0-4B39-9133-E9C0D2F21BD9} = {5EC83D80-96A4-4CA3-A621-EEAC5CC2B108}
 		{C1940DAE-59DF-4F8F-8F2C-A1A39072FE62} = {5EC83D80-96A4-4CA3-A621-EEAC5CC2B108}
 		{87CE7BC3-BB0E-4560-A5EB-7B7C5E110DA7} = {5EC83D80-96A4-4CA3-A621-EEAC5CC2B108}
 		{8EF9A4BF-22E0-4B80-A2AC-310EA37E67B4} = {5EC83D80-96A4-4CA3-A621-EEAC5CC2B108}
-		{2115890F-87E2-4F62-8B5C-FA4E6DC179D2} = {83C06C6D-AB9F-4982-9DED-798C582C3DE9}
-		{54F1DDAF-5899-41EE-AFC9-EB6B67BE077F} = {83C06C6D-AB9F-4982-9DED-798C582C3DE9}
+		{9CF62C2A-C97A-4B61-A8A1-33FD846576FE} = {35D59C93-27C0-4CBA-B316-44B7C115B75C}
+		{E4E57161-CDAB-4148-9F31-C687313627F8} = {7A656461-9C3E-412F-8304-44F4E5A8E519}
+		{3F8B7C21-4E5D-42A8-9A3F-D1E2C3B4A5F6} = {7A656461-9C3E-412F-8304-44F4E5A8E519}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CD98B2C-D978-498D-B94E-5615A3687BF0}
