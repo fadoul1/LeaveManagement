@@ -1,0 +1,48 @@
+﻿using LeaveManagement.Application.Features.Employees.Commands.CreateEmployee;
+using LeaveManagement.Application.Features.Leaves.Commands.CreateLeave;
+using LeaveManagement.Application.Features.Leaves.Queries.GetLeavesByEmployeeId;
+using LeaveManagement.Application.Features.Leaves.Queries.GetLeavesList;
+using LeaveManagement.Application.Responses;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LeaveManagement.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class LeavesController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public LeavesController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet(Name = "GetAllLeaves")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<List<LeaveResponse>>> GetAllLeaves()
+    {
+        var leaves = await _mediator.Send(new GetLeavesListQuery());
+        return Ok(leaves);
+    }
+
+    [HttpPost(Name = "AddLeave")]
+    public async Task<ActionResult<LeaveResponse>> Create([FromBody] CreateLeaveCommand createLeaveCommand)
+    {
+        var leaveResponse = await _mediator.Send(createLeaveCommand);
+        return Ok(leaveResponse);
+    }
+
+    [HttpGet("{employeeId}", Name = "GetUserLeaves")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<List<LeaveResponse>>> GetUserLeaves(long employeeId)
+    {
+        var leaves = await _mediator.Send(new GetLeavesByEmployeeIdQuery {
+            EmployeeId = employeeId
+        });
+        return Ok(leaves);
+    }
+}

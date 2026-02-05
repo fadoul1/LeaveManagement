@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LeaveManagement.API\LeaveManagement.API.csproj" />
+    <ProjectReference Include="..\..\src\LeaveManagement.API\LeaveManagement.API.csproj" />
+    <ProjectReference Include="..\..\src\LeaveManagement.McpServer\LeaveManagement.McpServer.csproj" />
   </ItemGroup>
 
 </Project>

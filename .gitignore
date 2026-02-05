@@ -40,7 +40,11 @@ bld/
 #wwwroot/
 
 .idea/
+<<<<<<< HEAD
 
+=======
+.sonarqube/
+>>>>>>> 443523f (feat(mcpServer): phase 1 and 2)
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 

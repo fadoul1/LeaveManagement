@@ -37,9 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LeaveManagement.API\LeaveManagement.API.csproj" />
-    <ProjectReference Include="..\LeaveManagement.Application\LeaveManagement.Application.csproj" />
-    <ProjectReference Include="..\LeaveManagement.Persistence\LeaveManagement.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\LeaveManagement.API\LeaveManagement.API.csproj" />
+    <ProjectReference Include="..\..\src\LeaveManagement.Application\LeaveManagement.Application.csproj" />
+    <ProjectReference Include="..\..\src\LeaveManagement.Persistence\LeaveManagement.Persistence.csproj" />
     <ProjectReference Include="..\LeaveManagement.Tests.Common\LeaveManagement.Tests.Common.csproj" />
   </ItemGroup>
 
