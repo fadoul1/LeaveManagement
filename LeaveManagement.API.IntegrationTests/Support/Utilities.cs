@@ -10,14 +10,14 @@ internal static class Utilities
     {
         List<Employee>? initialEmployees =
         [
-            new() 
+            new()
             {
                 FirstName = "John",
                 LastName = "Doe",
                 Email = "john.doe@example.com",
                 PhoneNumber = "123456789"
             },
-            new() 
+            new()
             {
                 FirstName = "Jane",
                 LastName = "Smith",
@@ -49,7 +49,7 @@ internal static class Utilities
             .OrderBy(e => e.Id)
             .Take(2)
             .ToList();
-            
+
         if (employees.Count < 2)
         {
             return; // Not enough employees to create leaves

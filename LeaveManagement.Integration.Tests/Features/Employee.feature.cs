@@ -15,41 +15,41 @@ namespace LeaveManagement.Persistence.Tests.Features
     using Reqnroll;
     using System;
     using System.Linq;
-    
-    
+
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public partial class EmployeeFeature : object, Xunit.IClassFixture<EmployeeFeature.FixtureData>, Xunit.IAsyncLifetime
     {
-        
+
         private global::Reqnroll.ITestRunner testRunner;
-        
+
         private static string[] featureTags = ((string[])(null));
-        
+
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Employee", "Employee Persistence operations", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
-        
+
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
-        
+
 #line 1 "Employee.feature"
 #line hidden
-        
+
         public EmployeeFeature(EmployeeFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
         }
-        
+
         public static async System.Threading.Tasks.Task FeatureSetupAsync()
         {
         }
-        
+
         public static async System.Threading.Tasks.Task FeatureTearDownAsync()
         {
         }
-        
+
         public async System.Threading.Tasks.Task TestInitializeAsync()
         {
             testRunner = global::Reqnroll.TestRunnerManager.GetTestRunnerForAssembly(featureHint: featureInfo);
-            if (((testRunner.FeatureContext != null) 
+            if (((testRunner.FeatureContext != null)
                         && (testRunner.FeatureContext.FeatureInfo.Equals(featureInfo) == false)))
             {
                 await testRunner.OnFeatureEndAsync();
@@ -59,49 +59,49 @@ namespace LeaveManagement.Persistence.Tests.Features
                 await testRunner.OnFeatureStartAsync(featureInfo);
             }
         }
-        
+
         public async System.Threading.Tasks.Task TestTearDownAsync()
         {
             await testRunner.OnScenarioEndAsync();
             global::Reqnroll.TestRunnerManager.ReleaseTestRunner(testRunner);
         }
-        
+
         public void ScenarioInitialize(global::Reqnroll.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
-        
+
         public async System.Threading.Tasks.Task ScenarioStartAsync()
         {
             await testRunner.OnScenarioStartAsync();
         }
-        
+
         public async System.Threading.Tasks.Task ScenarioCleanupAsync()
         {
             await testRunner.CollectScenarioErrorsAsync();
         }
-        
+
         public virtual async System.Threading.Tasks.Task FeatureBackgroundAsync()
         {
 #line 5
 #line hidden
 #line 6
- await testRunner.GivenAsync("there are existing employees in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+            await testRunner.GivenAsync("there are existing employees in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
         }
-        
+
         async System.Threading.Tasks.Task Xunit.IAsyncLifetime.InitializeAsync()
         {
             await this.TestInitializeAsync();
         }
-        
+
         async System.Threading.Tasks.Task Xunit.IAsyncLifetime.DisposeAsync()
         {
             await this.TestTearDownAsync();
         }
-        
-        [SkippableFact(DisplayName="Retrieve list of employees")]
+
+        [SkippableFact(DisplayName = "Retrieve list of employees")]
         [Trait("FeatureTitle", "Employee")]
         [Trait("Description", "Retrieve list of employees")]
         public async System.Threading.Tasks.Task RetrieveListOfEmployees()
@@ -110,7 +110,7 @@ namespace LeaveManagement.Persistence.Tests.Features
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Retrieve list of employees", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 8
-this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -120,19 +120,19 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-await this.FeatureBackgroundAsync();
+                await this.FeatureBackgroundAsync();
 #line hidden
 #line 9
- await testRunner.WhenAsync("the user queries for the list of employees", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+                await testRunner.WhenAsync("the user queries for the list of employees", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 10
- await testRunner.ThenAsync("the system should return a list of employees from the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+                await testRunner.ThenAsync("the system should return a list of employees from the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
-        
-        [SkippableFact(DisplayName="Retrieve employee by ID")]
+
+        [SkippableFact(DisplayName = "Retrieve employee by ID")]
         [Trait("FeatureTitle", "Employee")]
         [Trait("Description", "Retrieve employee by ID")]
         public async System.Threading.Tasks.Task RetrieveEmployeeByID()
@@ -141,7 +141,7 @@ await this.FeatureBackgroundAsync();
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Retrieve employee by ID", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 12
-this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -151,22 +151,22 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-await this.FeatureBackgroundAsync();
+                await this.FeatureBackgroundAsync();
 #line hidden
 #line 13
- await testRunner.GivenAsync("there is an employee with ID 1 in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+                await testRunner.GivenAsync("there is an employee with ID 1 in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 14
- await testRunner.WhenAsync("the user queries for the employee with ID 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+                await testRunner.WhenAsync("the user queries for the employee with ID 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 15
- await testRunner.ThenAsync("the system should return the employee with ID 1 from the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+                await testRunner.ThenAsync("the system should return the employee with ID 1 from the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
-        
-        [SkippableFact(DisplayName="Create a new employee")]
+
+        [SkippableFact(DisplayName = "Create a new employee")]
         [Trait("FeatureTitle", "Employee")]
         [Trait("Description", "Create a new employee")]
         public async System.Threading.Tasks.Task CreateANewEmployee()
@@ -175,7 +175,7 @@ await this.FeatureBackgroundAsync();
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create a new employee", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 17
-this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -185,7 +185,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-await this.FeatureBackgroundAsync();
+                await this.FeatureBackgroundAsync();
 #line hidden
                 global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "FirstName",
@@ -196,16 +196,16 @@ await this.FeatureBackgroundAsync();
                             "Doe",
                             "john.doe@example.com"});
 #line 18
- await testRunner.WhenAsync("the user creates a new employee with details:", ((string)(null)), table1, "When ");
+                await testRunner.WhenAsync("the user creates a new employee with details:", ((string)(null)), table1, "When ");
 #line hidden
 #line 21
- await testRunner.ThenAsync("the system should successfully create the employee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+                await testRunner.ThenAsync("the system should successfully create the employee", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
-        
-        [SkippableFact(DisplayName="Update an existing employee")]
+
+        [SkippableFact(DisplayName = "Update an existing employee")]
         [Trait("FeatureTitle", "Employee")]
         [Trait("Description", "Update an existing employee")]
         public async System.Threading.Tasks.Task UpdateAnExistingEmployee()
@@ -214,7 +214,7 @@ await this.FeatureBackgroundAsync();
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Update an existing employee", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 23
-this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -224,10 +224,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-await this.FeatureBackgroundAsync();
+                await this.FeatureBackgroundAsync();
 #line hidden
 #line 24
- await testRunner.GivenAsync("there is an existing employee with ID 1 in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+                await testRunner.GivenAsync("there is an existing employee with ID 1 in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
                 global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "FirstName",
@@ -238,16 +238,16 @@ await this.FeatureBackgroundAsync();
                             "Employee",
                             "updated.employee@example.com"});
 #line 25
- await testRunner.WhenAsync("the user updates the employee with ID 1 with details:", ((string)(null)), table2, "When ");
+                await testRunner.WhenAsync("the user updates the employee with ID 1 with details:", ((string)(null)), table2, "When ");
 #line hidden
 #line 28
- await testRunner.ThenAsync("the system should successfully update the employee with ID 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+                await testRunner.ThenAsync("the system should successfully update the employee with ID 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
-        
-        [SkippableFact(DisplayName="Delete an existing employee")]
+
+        [SkippableFact(DisplayName = "Delete an existing employee")]
         [Trait("FeatureTitle", "Employee")]
         [Trait("Description", "Delete an existing employee")]
         public async System.Threading.Tasks.Task DeleteAnExistingEmployee()
@@ -256,7 +256,7 @@ await this.FeatureBackgroundAsync();
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Delete an existing employee", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 30
-this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -266,31 +266,31 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-await this.FeatureBackgroundAsync();
+                await this.FeatureBackgroundAsync();
 #line hidden
 #line 31
- await testRunner.GivenAsync("there is an employee with ID 4 in the database we want to delete", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+                await testRunner.GivenAsync("there is an employee with ID 4 in the database we want to delete", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 32
- await testRunner.WhenAsync("the user deletes the employee with ID 4", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+                await testRunner.WhenAsync("the user deletes the employee with ID 4", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 33
- await testRunner.ThenAsync("the system should successfully delete the employee with ID 4", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+                await testRunner.ThenAsync("the system should successfully delete the employee with ID 4", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
-        
+
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : object, Xunit.IAsyncLifetime
         {
-            
+
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.InitializeAsync()
             {
                 await EmployeeFeature.FeatureSetupAsync();
             }
-            
+
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.DisposeAsync()
             {
                 await EmployeeFeature.FeatureTearDownAsync();
