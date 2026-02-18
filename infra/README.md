@@ -6,23 +6,39 @@
                     ┌─────────────────────────────────────────────────────┐
                     │                    Azure                            │
                     │  ┌─────────────┐   ┌──────────────────────────────┐ │
-  GitHub Actions ───┼──│     ACR     │───│   Container Apps Environment │ │
-                    │  │  (Registry) │   │  ┌────────────────────────┐  │ │
-                    │  └─────────────┘   │  │    Container App       │  │ │
-                    │                    │  │    (API .NET 10)       │  │ │
-                    │                    │  └───────────┬────────────┘  │ │
+  GitHub Actions ───┼──│     ACR     │──►│   Container Apps Environment │ │
+   (push image)     │  │  (Registry) │   │  ┌────────────────────────┐  │ │
+                    │  └──────┬──────┘   │  │    Container App       │  │ │
+                    │         │ webhook  │  │    (API .NET 10)       │  │ │
+                    │         └────────► │  └───────────┬────────────┘  │ │
                     │                    └──────────────┼───────────────┘ │
                     │                                   │                 │
                     │  ┌────────────────────────────────▼───────────────┐ │
-                    │  │         PostgreSQL Flexible Server            │ │
+                    │  │         PostgreSQL Flexible Server             │ │
                     │  └───────────────────────────────────────────────┘ │
                     └─────────────────────────────────────────────────────┘
 ```
 
+## Stratégie de déploiement
+
+Le pipeline CD utilise uniquement les **identifiants admin de l'ACR** pour pousser les images
+Docker. **Aucun Service Principal ni App Registration Entra ID n'est nécessaire.**
+
+Le déploiement automatique est assuré par le **Continuous Deployment** d'Azure Container Apps,
+qui crée un webhook ACR pour détecter les nouvelles images poussées.
+
+### Flux
+
+1. **CI** : Build, tests, qualité du code
+2. **CD - Push** : Build et push de l'image avec tag `staging` + SHA du commit
+3. **ACR webhook** → Container App staging crée une nouvelle révision automatiquement
+4. **Smoke test** : Vérification du endpoint `/health`
+5. **Promotion** : Re-tag de l'image `staging` → `production` (sans rebuild)
+6. **ACR webhook** → Container App production crée une nouvelle révision automatiquement
+
 ## Prérequis
 
 - Azure CLI installé et connecté (`az login`)
-- jq installé (pour le parsing JSON)
 - Compte GitHub avec accès au repository
 
 ## Déploiement Initial
@@ -30,42 +46,62 @@
 ### 1. Déployer l'infrastructure Azure
 
 ```bash
-# Staging
 cd infra
 chmod +x deploy.sh
 ./deploy.sh staging
+```
 
-# Production
+Le script :
+- Crée le Resource Group, ACR, Container Apps Environment, PostgreSQL
+- Pousse une image placeholder avec le tag `staging`
+- Met à jour la Container App pour référencer l'image taguée
+- Affiche les credentials et variables à configurer dans GitHub
+
+Pour la production :
+```bash
 ./deploy.sh production
 ```
 
-### 2. Configurer les secrets GitHub
+### 2. Activer le Continuous Deployment (une seule fois)
 
-Après le déploiement, ajoutez les secrets suivants dans GitHub :
+Dans le **portail Azure**, pour chaque Container App :
+
+1. Ouvrir la ressource Container App
+2. Menu gauche → **Continuous deployment**
+3. Activer le déploiement continu
+4. Container registry : votre ACR
+5. Image : `leavemanagement-api`
+6. Tag : `staging` (ou `production` selon l'environnement)
+
+Ceci crée un webhook ACR qui déclenche automatiquement une nouvelle révision
+quand une image est poussée avec le tag correspondant.
+
+> **Aucun Service Principal ni Entra ID requis** pour cette approche.
+
+### 3. Configurer les secrets GitHub
+
 **Settings > Secrets and variables > Actions > Secrets**
 
 | Secret | Description |
 |--------|-------------|
-| `ACR_USERNAME` | Username du Container Registry |
-| `ACR_PASSWORD` | Password du Container Registry |
-| `AZURE_CREDENTIALS` | JSON des credentials du Service Principal |
+| `ACR_USERNAME` | Username admin du Container Registry |
+| `ACR_PASSWORD` | Password admin du Container Registry |
 
-### 3. Configurer les variables GitHub
+### 4. Configurer les variables GitHub
 
 **Settings > Secrets and variables > Actions > Variables**
 
 | Variable | Description | Exemple |
 |----------|-------------|---------|
-| `AZURE_CONTAINER_REGISTRY` | URL du registry | `leavemanagementacr123.azurecr.io` |
-| `CONTAINER_APP_NAME` | Nom de la Container App | `leavemanagement-api` |
-| `RESOURCE_GROUP` | Nom du Resource Group | `rg-leavemanagement` |
+| `AZURE_CONTAINER_REGISTRY` | Login server de l'ACR | `leavemanagementacr123.azurecr.io` |
+| `STAGING_APP_URL` | URL complète de la Container App staging | `https://leavemanagement-api-staging.xxx.azurecontainerapps.io` |
 
-### 4. Configurer les environnements GitHub
+### 5. Configurer les environnements GitHub
 
 Créez deux environnements dans GitHub (**Settings > Environments**) :
 
 1. **staging** - Déploiement automatique
-2. **production** - Avec protection (reviewers requis)
+2. **production** - Avec protection (reviewers requis recommandé)
 
 ## Workflows CI/CD
 
@@ -87,35 +123,40 @@ Déclenché sur :
 - Déclenchement manuel (workflow_dispatch)
 
 Actions :
-- Build et push de l'image Docker vers ACR
-- Déploiement sur staging
-- Déploiement sur production (après staging)
+1. Gate de qualité CI (réutilise `ci.yml`)
+2. Build et push de l'image Docker vers ACR (tags `staging` + SHA)
+3. Attente de la propagation du déploiement continu (~60s)
+4. Smoke test sur staging (`/health`)
+5. Promotion vers production : re-tag `staging` → `production`
+
+> Le workflow CD **n'utilise aucune commande `az`**.
+> Il communique uniquement avec l'ACR via `docker/login-action` et `docker/build-push-action`.
 
 ## Commandes Azure Utiles
 
 ```bash
 # Voir les logs de l'application
 az containerapp logs show \
-  --name leavemanagement-api \
+  --name leavemanagement-api-staging \
   --resource-group rg-leavemanagement \
   --follow
 
 # Redémarrer l'application
 az containerapp revision restart \
-  --name leavemanagement-api \
+  --name leavemanagement-api-staging \
   --resource-group rg-leavemanagement
 
 # Voir l'état de l'application
 az containerapp show \
-  --name leavemanagement-api \
+  --name leavemanagement-api-staging \
   --resource-group rg-leavemanagement \
   --query properties.latestRevisionFqdn
 
-# Connexion à PostgreSQL
-az postgres flexible-server connect \
-  --name leavemanagement-db \
-  --admin-user pgadmin \
-  --admin-password <password>
+# Mise à jour manuelle de l'image (si continuous deployment non activé)
+az containerapp update \
+  --name leavemanagement-api-staging \
+  --resource-group rg-leavemanagement \
+  --image <acr-login-server>/leavemanagement-api:staging
 ```
 
 ## Variables d'environnement de l'application

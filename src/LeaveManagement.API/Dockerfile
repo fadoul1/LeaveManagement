@@ -1,38 +1,37 @@
 # Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
-WORKDIR /src
+WORKDIR /repo
 
 # Copy solution and project files
-COPY LeaveManagement.sln .
-COPY LeaveManagement.Domain/LeaveManagement.Domain.csproj LeaveManagement.Domain/
-COPY LeaveManagement.Application/LeaveManagement.Application.csproj LeaveManagement.Application/
-COPY LeaveManagement.Persistence/LeaveManagement.Persistence.csproj LeaveManagement.Persistence/
-COPY LeaveManagement.ExternalServices/LeaveManagement.ExternalServices.csproj LeaveManagement.ExternalServices/
-COPY LeaveManagement.ServiceDefaults/LeaveManagement.ServiceDefaults.csproj LeaveManagement.ServiceDefaults/
-COPY LeaveManagement.API/LeaveManagement.API.csproj LeaveManagement.API/
+COPY LeaveManagement.slnx .
+COPY src/LeaveManagement.Domain/LeaveManagement.Domain.csproj src/LeaveManagement.Domain/
+COPY src/LeaveManagement.Application/LeaveManagement.Application.csproj src/LeaveManagement.Application/
+COPY src/LeaveManagement.Persistence/LeaveManagement.Persistence.csproj src/LeaveManagement.Persistence/
+COPY src/LeaveManagement.ExternalServices/LeaveManagement.ExternalServices.csproj src/LeaveManagement.ExternalServices/
+COPY _aspire/LeaveManagement.ServiceDefaults/LeaveManagement.ServiceDefaults.csproj _aspire/LeaveManagement.ServiceDefaults/
+COPY src/LeaveManagement.API/LeaveManagement.API.csproj src/LeaveManagement.API/
 
 # Restore dependencies
-RUN dotnet restore LeaveManagement.API/LeaveManagement.API.csproj
+RUN dotnet restore src/LeaveManagement.API/LeaveManagement.API.csproj
 
 # Copy source code
-COPY LeaveManagement.Domain/ LeaveManagement.Domain/
-COPY LeaveManagement.Application/ LeaveManagement.Application/
-COPY LeaveManagement.Persistence/ LeaveManagement.Persistence/
-COPY LeaveManagement.ExternalServices/ LeaveManagement.ExternalServices/
-COPY LeaveManagement.ServiceDefaults/ LeaveManagement.ServiceDefaults/
-COPY LeaveManagement.API/ LeaveManagement.API/
+COPY src/LeaveManagement.Domain/ src/LeaveManagement.Domain/
+COPY src/LeaveManagement.Application/ src/LeaveManagement.Application/
+COPY src/LeaveManagement.Persistence/ src/LeaveManagement.Persistence/
+COPY src/LeaveManagement.ExternalServices/ src/LeaveManagement.ExternalServices/
+COPY _aspire/LeaveManagement.ServiceDefaults/ _aspire/LeaveManagement.ServiceDefaults/
+COPY src/LeaveManagement.API/ src/LeaveManagement.API/
 
 # Build and publish
-WORKDIR /src/LeaveManagement.API
+WORKDIR /repo/src/LeaveManagement.API
 RUN dotnet publish -c Release -o /app/publish --no-restore
 
 # Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 
-# Create non-root user for security
-RUN adduser --disabled-password --gecos "" appuser
-USER appuser
+# Use the built-in non-root user provided by .NET 8+ runtime images
+USER app
 
 COPY --from=build /app/publish .
 

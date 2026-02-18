@@ -14,7 +14,7 @@ internal class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TSt
     where TStartup : class
 {
     private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
-        .WithImage("postgres:latest")
+        .WithImage("postgres:16-alpine")
         .WithDatabase("LeaveManagementDb")
         .WithUsername("postgres")
         .WithPassword("postgres")

@@ -18,6 +18,8 @@ public static class StartupExtensions
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddControllers();
 
+        builder.Services.AddHealthChecks();
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy(
@@ -47,6 +49,8 @@ public static class StartupExtensions
         app.UseCors();
 
         app.MapControllers();
+
+        app.MapHealthChecks("/health");
 
         return app;
     }

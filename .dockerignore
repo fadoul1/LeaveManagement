@@ -18,3 +18,8 @@
 **/*.md
 **/Dockerfile*
 **/.dockerignore
+tests/
+_aspire/LeaveManagement.AppHost/
+infra/
+.sonarqube/
+.claude/
