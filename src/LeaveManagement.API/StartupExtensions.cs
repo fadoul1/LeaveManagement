@@ -2,6 +2,8 @@
 using LeaveManagement.ExternalServices;
 using LeaveManagement.Persistence;
 using LeaveManagement.Persistence.Data;
+using LeaveManagement.Persistence;
+using LeaveManagement.Persistence.Data;
 using Microsoft.OpenApi;
 
 namespace LeaveManagement.API;
@@ -17,6 +19,8 @@ public static class StartupExtensions
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddControllers();
+
+        builder.Services.AddHealthChecks();
 
         builder.Services.AddCors(options =>
         {
@@ -47,6 +51,8 @@ public static class StartupExtensions
         app.UseCors();
 
         app.MapControllers();
+
+        app.MapHealthChecks("/health");
 
         return app;
     }
