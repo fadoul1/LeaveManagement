@@ -13,8 +13,7 @@ namespace LeaveManagement.API.IntegrationTests.Support;
 internal class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
     where TStartup : class
 {
-    private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
-        .WithImage("postgres:16-alpine")
+    private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder("postgres:16-alpine")
         .WithDatabase("LeaveManagementDb")
         .WithUsername("postgres")
         .WithPassword("postgres")

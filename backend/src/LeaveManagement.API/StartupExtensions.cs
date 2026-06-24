@@ -79,7 +79,7 @@ public static class StartupExtensions
                 await context.Database.EnsureCreatedAsync();
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             //var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
             // logger.LogError(ex, "An error occurred while creating the database.");

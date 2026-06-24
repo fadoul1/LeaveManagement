@@ -17,7 +17,7 @@ internal class Hooks
     [Reqnroll.AfterTestRun]
     public static async Task AfterTestRun()
     {
-        await _factory.DisposeAsync();
+        if (_factory is not null) await _factory.DisposeAsync();
     }
 
     [Reqnroll.BeforeScenario(Order = 0)]
