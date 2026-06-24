@@ -17,7 +17,7 @@
     <ProjectReference Include="..\LeaveManagement.Application\LeaveManagement.Application.csproj" />
     <ProjectReference Include="..\LeaveManagement.ExternalServices\LeaveManagement.ExternalServices.csproj" />
     <ProjectReference Include="..\LeaveManagement.Persistence\LeaveManagement.Persistence.csproj" />
-    <ProjectReference Include="..\..\_aspire\LeaveManagement.ServiceDefaults\LeaveManagement.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\_aspire\LeaveManagement.ServiceDefaults\LeaveManagement.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

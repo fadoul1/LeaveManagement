@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LeaveManagement.API\LeaveManagement.API.csproj" />
+    <ProjectReference Include="..\..\backend\src\LeaveManagement.API\LeaveManagement.API.csproj" />
   </ItemGroup>
 
 </Project>
