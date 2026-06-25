@@ -16,7 +16,7 @@ internal class EmployeeApiStepDefinitions
 {
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly HttpClient _httpClient;
-    private HttpResponseMessage _response;
+    private HttpResponseMessage _response = null!;
 
     public EmployeeApiStepDefinitions(CustomWebApplicationFactory<Program> factory)
     {

@@ -12,11 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.4.6" />
+    <PackageReference Include="Aspire.Hosting.AppHost" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LeaveManagement.API\LeaveManagement.API.csproj" />
+    <ProjectReference Include="..\..\backend\src\LeaveManagement.API\LeaveManagement.API.csproj" />
   </ItemGroup>
 
 </Project>

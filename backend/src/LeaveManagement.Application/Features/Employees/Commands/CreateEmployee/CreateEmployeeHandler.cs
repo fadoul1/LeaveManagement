@@ -78,6 +78,6 @@ public partial class CreateEmployeeHandler(
     [LoggerMessage(LogLevel.Information, "[{className}][{methodeName}] Successfully created the user")]
     static partial void LogSuccessfullyCreateEmployee(ILogger<CreateEmployeeHandler> logger, string className, string methodeName);
 
-    [LoggerMessage(LogLevel.Error, "[{className}][{methodeName}] Exception: {exception}, Message: {exMessage}")]
+    [LoggerMessage(LogLevel.Error, "[{className}][{methodeName}] Message: {exMessage}")]
     static partial void LogExceptionMessage(ILogger<CreateEmployeeHandler> logger, string className, string methodeName, Exception exception, string exMessage);
 }

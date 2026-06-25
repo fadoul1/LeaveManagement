@@ -1,0 +1,43 @@
+<Solution>
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/.github/dotnet-instructions/">
+    <File Path="../.github/dotnet-instructions/chapter-10_classes.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-12_emergence.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-15_xUnit_Internals.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-2_meaningful_names.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-3_functions.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-4_comments.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-5_formatting.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-6_objects_and_data_structures.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-7_error_handling.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-8_boundaries.instructions.md" />
+    <File Path="../.github/dotnet-instructions/chapter-9_unit_tests.instructions.md" />
+  </Folder>
+  <Folder Name="/.github/prompts/">
+    <File Path="../.github/prompts/software-craftsmanship.prompt.md" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Application/">
+    <Project Path="src/LeaveManagement.Application/LeaveManagement.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Domain/">
+    <Project Path="src/LeaveManagement.Domain/LeaveManagement.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/LeaveManagement.ExternalServices/LeaveManagement.ExternalServices.csproj" />
+    <Project Path="src/LeaveManagement.Persistence/LeaveManagement.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="src/LeaveManagement.API/LeaveManagement.API.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LeaveManagement.API.IntegrationTests/LeaveManagement.API.IntegrationTests.csproj" />
+    <Project Path="tests/LeaveManagement.Tests.Common/LeaveManagement.Tests.Common.csproj" />
+  </Folder>
+  <Folder Name="/_aspire/">
+    <Project Path="../_aspire/LeaveManagement.AppHost/LeaveManagement.AppHost.csproj" />
+    <Project Path="../_aspire/LeaveManagement.ServiceDefaults/LeaveManagement.ServiceDefaults.csproj" />
+  </Folder>
+</Solution>

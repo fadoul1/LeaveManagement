@@ -11,6 +11,7 @@ env:
   DOTNET_VERSION: '10.0.x'
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  SOLUTION: backend/LeaveManagement.slnx
 
 jobs:
   build:
@@ -35,17 +36,17 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Restore workloads
-        run: dotnet workload restore
+        run: dotnet workload restore ${{ env.SOLUTION }}
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ env.SOLUTION }}
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build ${{ env.SOLUTION }} --no-restore --configuration Release
 
       - name: Run Unit Tests
         run: |
-          dotnet test --no-build \
+          dotnet test ${{ env.SOLUTION }} --no-build \
             --configuration Release \
             --verbosity normal \
             --logger "trx;LogFileName=unit-tests.trx" \
@@ -72,13 +73,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore workloads
-        run: dotnet workload restore
+        run: dotnet workload restore ${{ env.SOLUTION }}
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ env.SOLUTION }}
 
       - name: Check formatting
-        run: dotnet format --verify-no-changes --verbosity diagnostic || true
+        run: dotnet format ${{ env.SOLUTION }} --verify-no-changes --verbosity diagnostic || true
 
   docker-build:
     name: Docker Build
@@ -96,7 +97,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./src/LeaveManagement.API/Dockerfile
+          file: ./backend/Dockerfile
           push: false
           tags: leavemanagement-api:${{ github.sha }}
           cache-from: type=gha
