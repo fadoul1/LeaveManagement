@@ -1,0 +1,123 @@
+name: leave-management-infra
+
+# ============================================================
+# RÉSEAU
+# Tous les containers communiquent entre eux via infra-network.
+# Les apps hors container (BFF, Web API, Angular) accèdent
+# aux services via les ports exposés sur localhost.
+# ============================================================
+networks:
+  infra-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+# ============================================================
+# VOLUMES PERSISTANTS
+# Les données survivent aux `podman compose down`.
+# Seul `podman compose down -v` les supprime.
+# ============================================================
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+# ============================================================
+# SERVICES
+# ============================================================
+services:
+
+  # ----------------------------------------------------------
+  # PostgreSQL 16
+  # Schémas :
+  #   - public   → app .NET (sessions BFF, Data Protection keys, données métier)
+  #   - keycloak → Keycloak (créé automatiquement par Keycloak au 1er démarrage)
+  # ----------------------------------------------------------
+  postgres:
+    image: docker.io/postgres:16
+    container_name: leave-management-postgres
+    restart: unless-stopped
+    networks:
+      infra-network:
+        ipv4_address: 172.20.0.10
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d:ro   # scripts SQL d'init (optionnel, dossier peut être vide)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ----------------------------------------------------------
+  # Keycloak 26
+  # Client BFF à créer manuellement après le 1er démarrage
+  # (ou via import-realm si tu as exporté la config).
+  # ----------------------------------------------------------
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.2.5
+    container_name: leave-management-keycloak
+    restart: unless-stopped
+    networks:
+      infra-network:
+        ipv4_address: 172.20.0.20
+    environment:
+      # Console admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
+      # Base de données — utilise l'IP fixe du container postgres
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://172.20.0.10:5432/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_DB_SCHEMA: keycloak
+      # Hostname (dev uniquement — HTTP sans HTTPS)
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: "8080"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_LOG_LEVEL: INFO
+    ports:
+      - "8080:8080"
+    # Décommente quand tu auras exporté ton realm Keycloak :
+    volumes:
+      - ./keycloak/realm-export:/opt/keycloak/data/import:ro
+    command: start-dev --import-realm   # ← activer après export du realm
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ----------------------------------------------------------
+  # pgAdmin 4
+  # Interface web pour administrer PostgreSQL.
+  # Accès : http://localhost:5050
+  # ----------------------------------------------------------
+  pgadmin:
+    image: docker.io/dpage/pgadmin4:latest
+    container_name: leave-management-pgadmin
+    restart: unless-stopped
+    networks:
+      infra-network:
+        ipv4_address: 172.20.0.30
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
