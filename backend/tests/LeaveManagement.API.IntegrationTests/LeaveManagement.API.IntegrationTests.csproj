@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Respawn" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" />
     <PackageReference Include="Testcontainers.PostgreSql" />
     <PackageReference Include="Reqnroll.SpecFlowCompatibility" />
     <PackageReference Include="Reqnroll.xUnit" />
