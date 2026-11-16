@@ -371,3 +371,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .sonarqube/
+
+# Docker Compose - Local environment variables
+.env
