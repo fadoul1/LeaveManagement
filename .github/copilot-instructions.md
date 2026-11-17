@@ -114,7 +114,7 @@ dotnet run --project LeaveManagement.API
 - Comments: Explain "why" not "what", prefer self-documenting code
 
 ## Technology Stack
-- **.NET 10.0** (`global.json` specifies SDK)
+- **.NET 11.0** (`global.json` specifies SDK)
 - **MediatR** for CQRS
 - **FluentValidation** for validation
 - **EF Core + PostgreSQL** for data access

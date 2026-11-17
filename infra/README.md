@@ -9,7 +9,7 @@
   GitHub Actions ───┼──│     ACR     │──►│   Container Apps Environment │ │
    (push image)     │  │  (Registry) │   │  ┌────────────────────────┐  │ │
                     │  └──────┬──────┘   │  │    Container App       │  │ │
-                    │         │ webhook  │  │    (API .NET 10)       │  │ │
+                    │         │ webhook  │  │    (API .NET 11)       │  │ │
                     │         └────────► │  └───────────┬────────────┘  │ │
                     │                    └──────────────┼───────────────┘ │
                     │                                   │                 │
@@ -176,3 +176,64 @@ az containerapp update \
 | Log Analytics | Pay-as-you-go | ~$2-5 |
 
 **Total estimé : ~$25-45/mois** (staging avec scale à 0 quand inactif)
+
+## Docker Compose - Environnement local
+
+Le fichier `compose.yaml` à la racine du dépôt démarre PostgreSQL, l’API LeaveManagement et pgAdmin. Les variables locales sont stockées dans un fichier `.env` à la racine. Ce fichier est ignoré par Git grâce à l’entrée suivante dans `.gitignore` :
+
+```gitignore
+# Docker Compose - Local environment variables
+.env
+```
+
+### Étapes de configuration
+
+1. Créer un fichier `.env` à la racine du dépôt avec les valeurs nécessaires :
+
+   ```env
+   POSTGRES_USER=<utilisateur-postgres>
+   POSTGRES_PASSWORD=<mot-de-passe-postgres>
+   POSTGRES_DB=<nom-de-la-base>
+   PGADMIN_EMAIL=<adresse-email-pgadmin>
+   PGADMIN_PASSWORD=<mot-de-passe-pgadmin>
+   ```
+
+   Ne pas committer ce fichier ni y mettre des identifiants de production.
+
+2. Construire l’image de l’API avec le Dockerfile du dépôt :
+
+   ```bash
+   docker build -f backend/Dockerfile -t localhost/leavemanagement-api:latest .
+   ```
+
+3. Démarrer les services depuis la racine du dépôt :
+
+   ```bash
+   docker compose up -d
+   ```
+
+4. Vérifier leur état :
+
+   ```bash
+   docker compose ps
+   ```
+
+### Accès aux services
+
+- API : `http://localhost:5150`
+- pgAdmin : `http://localhost:5050`
+- PostgreSQL : `localhost:5432`
+
+L’API attend que PostgreSQL soit prêt avant de démarrer. Les données PostgreSQL et pgAdmin sont conservées dans des volumes Docker.
+
+Pour arrêter les services sans supprimer les données :
+
+```bash
+docker compose down
+```
+
+Pour arrêter les services et supprimer également les volumes et leurs données :
+
+```bash
+docker compose down -v
+```
