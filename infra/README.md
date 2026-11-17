@@ -9,7 +9,7 @@
   GitHub Actions ───┼──│     ACR     │──►│   Container Apps Environment │ │
    (push image)     │  │  (Registry) │   │  ┌────────────────────────┐  │ │
                     │  └──────┬──────┘   │  │    Container App       │  │ │
-                    │         │ webhook  │  │    (API .NET 10)       │  │ │
+                    │         │ webhook  │  │    (API .NET 11)       │  │ │
                     │         └────────► │  └───────────┬────────────┘  │ │
                     │                    └──────────────┼───────────────┘ │
                     │                                   │                 │
